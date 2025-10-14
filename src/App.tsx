@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Droplet, Award, Shield, Leaf, Star, Users, CheckCircle, Sparkles, Heart, TrendingUp, Building2, Handshake, FileText, Send, Zap, Globe, Package, BadgeCheck } from 'lucide-react';
+import { Menu, X, ChevronDown, Droplet, Award, Shield, Leaf, Star, Users, CheckCircle, Sparkles, Heart, Building2, Handshake, FileText, Send, Zap, Globe, Package, BadgeCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase, type Product, type Client, type ProductCategory } from './lib/supabase';
 
 function App() {
@@ -22,6 +22,8 @@ function App() {
   const [showDistribution, setShowDistribution] = useState(false);
   const [countersStarted, setCountersStarted] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentProductSlide, setCurrentProductSlide] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -218,6 +220,55 @@ function App() {
     : fallbackWhatsappNumber;
   const whatsappUrl = `https://wa.me/${cleanedNumber}?text=${encodeURIComponent('Hello! I would like to know more.')}`;
 
+  // Hero slider data
+  const slides = [
+    {
+      tag: 'BEST CUSTOM LABEL WATER BRAND',
+      titleTop: 'Customised Water Bottle',
+      titleAccent: 'For Your Brand',
+      description: 'Get the Best custom-designed, high-quality water bottles! Choose from a wide variety of shapes and sizes to fit your specific needs',
+      imageUrl: 'https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&w=1200'
+    },
+    {
+      tag: 'REFRESHINGLY SUSTAINABLE',
+      titleTop: 'Our Premium Glass',
+      titleAccent: 'Bottles',
+      description: 'With our sustainable Glass bottles and vitamin B12-infused rich water, staying refreshed has never been so easier.',
+      imageUrl: 'https://images.pexels.com/photos/1346155/pexels-photo-1346155.jpeg?auto=compress&cs=tinysrgb&w=1200'
+    },
+    {
+      tag: 'PURE HYDRATION',
+      titleTop: 'Naturally Balanced',
+      titleAccent: 'Mineral Water',
+      description: 'Experience the purest form of hydration with our naturally balanced mineral water from pristine sources.',
+      imageUrl: 'https://images.pexels.com/photos/1187766/pexels-photo-1187766.jpeg?auto=compress&cs=tinysrgb&w=1200'
+    }
+  ];
+
+  // Auto-rotate slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+  const nextProductSlide = () => setCurrentProductSlide((prev) => (prev + 1) % Math.max(1, products.length));
+  const prevProductSlide = () => setCurrentProductSlide((prev) => (prev - 1 + Math.max(1, products.length)) % Math.max(1, products.length));
+
+  // Auto-rotate product slider
+  useEffect(() => {
+    if (products.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentProductSlide((prev) => (prev + 1) % products.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [products.length]);
+
   const faqs = [
     {
       question: 'Lorem ipsum dolor sit amet consectetur adipiscing elit?',
@@ -336,7 +387,7 @@ function App() {
                   </button>
                 </div>
               </div>
-              <a href="#contact" className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium">Contact</a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium">Place Bulk Order</a>
             </div>
 
             <button
@@ -371,70 +422,79 @@ function App() {
               <a href="#faq" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">FAQ</a>
               <button onClick={() => setShowFranchise(true)} className="block text-gray-700 hover:text-blue-600 py-2 font-medium w-full text-left">Franchise</button>
               <button onClick={() => setShowDistribution(true)} className="block text-gray-700 hover:text-blue-600 py-2 font-medium w-full text-left">Distribution</button>
-              <a href="#contact" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">Contact</a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">Place Bulk Order</a>
             </div>
           )}
         </nav>
       </header>
 
-      <section id="home" className="pt-32 pb-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 relative overflow-hidden min-h-screen flex items-center">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 right-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 left-10 w-80 h-80 bg-cyan-400 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-sky-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <section id="home" className="relative overflow-hidden min-h-screen flex items-center pt-20">
+        {/* Background Image Slider */}
+        <div className="absolute inset-0">
+          <img
+            key={currentSlide}
+            src={slides[currentSlide].imageUrl}
+            alt={`Slide ${currentSlide + 1}`}
+            className="w-full h-full object-cover transition-opacity duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         </div>
 
+        {/* Content Overlay */}
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 animate-fade-in">
-              <h1 className="text-5xl md:text-7xl font-bold text-blue-900 leading-tight">
-                Lorem Ipsum
-                <br />
-                <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-sky-600 bg-clip-text text-transparent animate-gradient">Dolor Sit Amet</span>
-              </h1>
-
-              <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <a href="#products" className="group bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all hover:scale-105 shadow-lg font-semibold flex items-center space-x-2">
-                  <span>Explore Products</span>
-                  <TrendingUp className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <button onClick={() => setShowFranchise(true)} className="bg-white/90 backdrop-blur-sm text-blue-700 px-8 py-4 rounded-full border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all font-semibold shadow-lg hover:shadow-xl">
-                  Franchise Opportunity
-                </button>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 pt-4">
-                <div className="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer group">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform inline-block">100%</div>
-                  <div className="text-sm text-gray-600 font-medium mt-1">Natural</div>
-                </div>
-                <div className="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer group">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform inline-block">84+</div>
-                  <div className="text-sm text-gray-600 font-medium mt-1">Minerals</div>
-                </div>
-                <div className="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer group">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform inline-block">pH 7.8</div>
-                  <div className="text-sm text-gray-600 font-medium mt-1">Balanced</div>
-                </div>
-              </div>
+          <div className="max-w-2xl space-y-6 animate-fade-in">
+            <div className="inline-block border-l-4 border-green-500 pl-4">
+              <span className="text-sm font-bold text-green-500 tracking-wider uppercase">{slides[currentSlide].tag}</span>
             </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+              {slides[currentSlide].titleTop}
+              <br />
+              <span className="text-white">{slides[currentSlide].titleAccent}</span>
+            </h1>
 
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/30 to-cyan-400/30 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                <img
-                  src="https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  alt="BrandBleu Water Bottle"
-                  className="relative w-full h-auto hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl">
+              {slides[currentSlide].description}
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a href="#products" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-md font-semibold transition-all hover:scale-105 shadow-lg">
+                READ MORE
+              </a>
+              <button onClick={() => setShowFranchise(true)} className="bg-gray-900 hover:bg-black text-white px-8 py-3 rounded-md font-semibold transition-all hover:scale-105 shadow-lg">
+                GET A QUOTE
+              </button>
             </div>
           </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 z-20"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-6 w-6 text-white" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 z-20"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-6 w-6 text-white" />
+        </button>
+
+        {/* Bullet Indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-3 z-20">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              className={`h-3 rounded-full transition-all ${
+                currentSlide === idx ? 'bg-white w-10' : 'bg-white/50 hover:bg-white/80 w-3'
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
         </div>
       </section>
 
@@ -506,6 +566,109 @@ function App() {
         </div>
       </section>
 
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Simple Ordering Process</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Get your custom branded water in three easy steps
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="relative mb-12">
+              <div className="flex flex-col md:flex-row items-center gap-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 group border border-blue-100">
+                <div className="relative flex-shrink-0">
+                  <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-6xl font-bold text-white">01</span>
+                  </div>
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Submit Your Requirements</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    Share your brand details, quantity needs, and design preferences through our simple inquiry form. Our team will review and get back to you within 24 hours.
+                  </p>
+                </div>
+                <div className="hidden md:block flex-shrink-0">
+                  <div className="w-40 h-40 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl shadow-xl flex items-center justify-center">
+                    <FileText className="h-20 w-20 text-blue-600" />
+                  </div>
+                </div>
+              </div>
+              <div className="hidden md:flex justify-center my-4">
+                <div className="w-1 h-12 bg-gradient-to-b from-blue-300 to-transparent"></div>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative mb-12">
+              <div className="flex flex-col md:flex-row-reverse items-center gap-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 group border border-blue-100">
+                <div className="relative flex-shrink-0">
+                  <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-6xl font-bold text-white">02</span>
+                  </div>
+                </div>
+                <div className="flex-1 text-center md:text-right">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Review & Approve Design</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    Our design team creates custom label mockups for your brand. Review options, request changes, and approve the final design along with pricing.
+                  </p>
+                </div>
+                <div className="hidden md:block flex-shrink-0">
+                  <div className="w-40 h-40 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl shadow-xl flex items-center justify-center">
+                    <CheckCircle className="h-20 w-20 text-blue-600" />
+                  </div>
+                </div>
+              </div>
+              <div className="hidden md:flex justify-center my-4">
+                <div className="w-1 h-12 bg-gradient-to-b from-blue-300 to-transparent"></div>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative">
+              <div className="flex flex-col md:flex-row items-center gap-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 group border border-blue-100">
+                <div className="relative flex-shrink-0">
+                  <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-6xl font-bold text-white">03</span>
+                  </div>
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Receive Your Order</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    Once approved, we begin production and deliver your custom branded water bottles directly to your doorstep with full quality assurance.
+                  </p>
+                </div>
+                <div className="hidden md:block flex-shrink-0">
+                  <div className="w-40 h-40 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl shadow-xl flex items-center justify-center">
+                    <Package className="h-20 w-20 text-blue-600" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-12 py-5 rounded-full font-bold text-xl transition-all hover:scale-105 shadow-2xl"
+            >
+              <span>GET A QUOTE</span>
+              <ChevronRight className="h-6 w-6" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="products" className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -513,87 +676,79 @@ function App() {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             </p>
-
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <button
-                onClick={() => setSelectedProductCategory('all')}
-                className={`px-6 py-2.5 rounded-full font-semibold transition-all ${
-                  selectedProductCategory === 'all'
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg'
-                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600'
-                }`}
-              >
-                All Products
-              </button>
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedProductCategory(category.id)}
-                  className={`px-6 py-2.5 rounded-full font-semibold transition-all ${
-                    selectedProductCategory === category.id
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
           </div>
 
           {loading ? (
             <div className="text-center py-20">
               <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
-          ) : filteredProducts.length === 0 ? (
+          ) : products.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-2xl text-gray-600">No products found. Products array length: {products.length}</p>
-              <p className="text-gray-500 mt-4">Loading state: {loading.toString()}</p>
+              <p className="text-2xl text-gray-600">No products available</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
+            <div className="relative">
+              {/* Product Slider */}
+              <div className="relative overflow-hidden rounded-3xl">
                 <div
-                  key={product.id}
-                  onClick={() => navigate(`/product/${product.id}`)}
-                  className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group cursor-pointer perspective-1000"
-                  style={{ transformStyle: 'preserve-3d' }}
+                  className="relative h-[500px] w-full"
                 >
-                  <div className="relative overflow-hidden h-72">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-                    <img
-                      src={product.image_url}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Premium
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-4 bg-gradient-to-b from-white to-gray-50 group-hover:from-blue-50 group-hover:to-cyan-50 transition-colors duration-500">
-                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{product.name}</h3>
-                    <p className="text-gray-600 leading-relaxed line-clamp-2">{product.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {product.features.slice(0, 3).map((feature, idx) => (
-                        <span key={idx} className="bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center space-x-1 group-hover:scale-105 transition-transform">
-                          <CheckCircle className="h-3 w-3" />
+                  {/* Background image */}
+                  <img
+                    key={currentProductSlide}
+                    src={products[currentProductSlide]?.image_url}
+                    alt={products[currentProductSlide]?.name}
+                    className="w-full h-full object-cover transition-opacity duration-700"
+                  />
+                  
+                  {/* Dark overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                  
+                  {/* Content overlay */}
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 p-12 max-w-2xl space-y-4">
+                    <h3 className="text-4xl md:text-5xl font-bold text-white">{products[currentProductSlide]?.name}</h3>
+                    <p className="text-gray-200 leading-relaxed text-lg">{products[currentProductSlide]?.description}</p>
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      {products[currentProductSlide]?.features.slice(0, 3).map((feature, idx) => (
+                        <span key={idx} className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+                          <CheckCircle className="h-4 w-4" />
                           <span>{feature}</span>
                         </span>
                       ))}
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/product/${product.id}`);
-                      }}
-                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-full hover:shadow-xl transition-all mt-4 font-semibold group-hover:scale-105 flex items-center justify-center space-x-2"
-                    >
-                      <span>View Details</span>
-                      <TrendingUp className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  <button
+                    onClick={prevProductSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 z-20"
+                    aria-label="Previous product"
+                  >
+                    <ChevronLeft className="h-6 w-6 text-white" />
+                  </button>
+                  <button
+                    onClick={nextProductSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 z-20"
+                    aria-label="Next product"
+                  >
+                    <ChevronRight className="h-6 w-6 text-white" />
+                  </button>
+
+                  {/* Bullet Indicators */}
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-3 z-20">
+                    {products.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentProductSlide(idx)}
+                        className={`h-3 rounded-full transition-all ${
+                          currentProductSlide === idx ? 'bg-white w-10' : 'bg-white/50 hover:bg-white/80 w-3'
+                        }`}
+                        aria-label={`Go to product ${idx + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           )}
         </div>
@@ -1173,3 +1328,4 @@ function App() {
 }
 
 export default App;
+
