@@ -522,92 +522,111 @@ function App() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-gray-50 via-white to-gray-50 border-y border-gray-100 overflow-hidden">
+      <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-6">
-          <p className="text-center text-gray-500 mb-10 font-medium tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
+          <p className="text-center text-gray-600 mb-12 font-bold tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
           
           {/* Client Logos Slider */}
           <div className="relative">
-            <div className="flex animate-scroll space-x-16 items-center">
-              {/* Taj Hotels */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-3xl font-serif font-bold text-gray-700">TAJ</span>
-                </div>
-              </div>
-              
+            <div className="flex animate-scroll space-x-12 items-center">
               {/* The Oberoi */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-serif italic text-gray-700">The Oberoi</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
               </div>
               
-              {/* ITC Hotels */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-gray-700">ITC</span>
-                </div>
+              {/* Trident */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
               </div>
               
-              {/* Leela Palaces */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-serif text-gray-700">The Leela</span>
-                </div>
+              {/* JW Marriott */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
+              </div>
+              
+              {/* Four Seasons */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
+              </div>
+              
+              {/* ITC */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
+              </div>
+              
+              {/* The Ritz-Carlton */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
+              </div>
+              
+              {/* Sofitel */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-light tracking-widest text-gray-700 whitespace-nowrap">SOFITEL</span>
               </div>
               
               {/* Hyatt */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-gray-700">HYATT</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-gray-800 whitespace-nowrap">HYATT</span>
               </div>
               
-              {/* Marriott */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-gray-700">Marriott</span>
-                </div>
+              {/* Hilton */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-700 whitespace-nowrap">Hilton</span>
               </div>
               
-              {/* Radisson */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-gray-700">RADISSON</span>
-                </div>
+              {/* TAJ */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-serif font-bold text-amber-800 whitespace-nowrap">TAJ</span>
+              </div>
+              
+              {/* The Leela */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">The Leela</span>
               </div>
               
               {/* Lemon Tree */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-xl font-semibold text-gray-700">Lemon Tree</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-green-600 whitespace-nowrap">Lemon Tree</span>
+              </div>
+              
+              {/* Radisson */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-gray-800 whitespace-nowrap">RADISSON</span>
+              </div>
+              
+              {/* Vistara */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-purple-800 whitespace-nowrap">VISTARA</span>
+              </div>
+              
+              {/* Reliance */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-blue-800 whitespace-nowrap">Reliance</span>
               </div>
 
-              {/* Duplicate set for seamless loop */}
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-3xl font-serif font-bold text-gray-700">TAJ</span>
-                </div>
+              {/* Duplicate for seamless loop */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
               </div>
               
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-serif italic text-gray-700">The Oberoi</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
               </div>
               
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-gray-700">ITC</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
               </div>
               
-              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <div className="w-32 h-20 flex items-center justify-center">
-                  <span className="text-2xl font-serif text-gray-700">The Leela</span>
-                </div>
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
               </div>
             </div>
           </div>
@@ -927,104 +946,6 @@ function App() {
               </div>
             </div>
           )}
-        </div>
-      </section>
-
-      <section id="faq" className="py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
-          </div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-2xl overflow-hidden hover:border-blue-300 transition-colors bg-white">
-                <button
-                  className="w-full px-6 py-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                >
-                  <span className="font-semibold text-lg text-left text-gray-900">{faq.question}</span>
-                  <ChevronDown className={`h-6 w-6 text-blue-600 transition-transform duration-300 flex-shrink-0 ml-4 ${openFaq === index ? 'rotate-180' : ''}`} />
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ${openFaq === index ? 'max-h-96' : 'max-h-0'}`}>
-                  <div className="px-6 py-6 bg-gradient-to-br from-gray-50 to-blue-50 border-t border-gray-200">
-                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-10 right-10 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-72 h-72 bg-cyan-300 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-              <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
-            </div>
-
-            <div className="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-2xl">
-              <form className="space-y-6" onSubmit={handleContactSubmit}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
-                      placeholder=""
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
-                      placeholder=""
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
-                  <input
-                    type="text"
-                    value={contactForm.subject}
-                    onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
-                    className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
-                    placeholder=""
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                  <textarea
-                    rows={6}
-                    required
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none hover:border-gray-300"
-                    placeholder=""
-                  />
-                </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl hover:shadow-2xl transition-all font-semibold text-lg hover:scale-[1.02] flex items-center justify-center space-x-2 group">
-                  <span>Send Message</span>
-                  <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
       </section>
 
