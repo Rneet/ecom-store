@@ -522,111 +522,92 @@ function App() {
         </div>
       </section>
 
-      <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
+      <section className="py-16 bg-gradient-to-r from-gray-50 via-white to-gray-50 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-6">
-          <p className="text-center text-gray-600 mb-12 font-bold tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
+          <p className="text-center text-gray-500 mb-10 font-medium tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
           
           {/* Client Logos Slider */}
           <div className="relative">
-            <div className="flex animate-scroll space-x-12 items-center">
+            <div className="flex animate-scroll space-x-16 items-center">
+              {/* Taj Hotels */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-3xl font-serif font-bold text-gray-700">TAJ</span>
+                </div>
+              </div>
+              
               {/* The Oberoi */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-serif italic text-gray-700">The Oberoi</span>
+                </div>
               </div>
               
-              {/* Trident */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
+              {/* ITC Hotels */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-3xl font-bold text-gray-700">ITC</span>
+                </div>
               </div>
               
-              {/* JW Marriott */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
-              </div>
-              
-              {/* Four Seasons */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
-              </div>
-              
-              {/* ITC */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
-              </div>
-              
-              {/* The Ritz-Carlton */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
-              </div>
-              
-              {/* Sofitel */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-light tracking-widest text-gray-700 whitespace-nowrap">SOFITEL</span>
+              {/* Leela Palaces */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-serif text-gray-700">The Leela</span>
+                </div>
               </div>
               
               {/* Hyatt */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-3xl font-bold text-gray-800 whitespace-nowrap">HYATT</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-3xl font-bold text-gray-700">HYATT</span>
+                </div>
               </div>
               
-              {/* Hilton */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-3xl font-bold text-blue-700 whitespace-nowrap">Hilton</span>
-              </div>
-              
-              {/* TAJ */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-3xl font-serif font-bold text-amber-800 whitespace-nowrap">TAJ</span>
-              </div>
-              
-              {/* The Leela */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">The Leela</span>
-              </div>
-              
-              {/* Lemon Tree */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-semibold text-green-600 whitespace-nowrap">Lemon Tree</span>
+              {/* Marriott */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-bold text-gray-700">Marriott</span>
+                </div>
               </div>
               
               {/* Radisson */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-bold text-gray-800 whitespace-nowrap">RADISSON</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-bold text-gray-700">RADISSON</span>
+                </div>
               </div>
               
-              {/* Vistara */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-bold text-purple-800 whitespace-nowrap">VISTARA</span>
-              </div>
-              
-              {/* Reliance */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-bold text-blue-800 whitespace-nowrap">Reliance</span>
+              {/* Lemon Tree */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-xl font-semibold text-gray-700">Lemon Tree</span>
+                </div>
               </div>
 
-              {/* Duplicate for seamless loop */}
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
+              {/* Duplicate set for seamless loop */}
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-3xl font-serif font-bold text-gray-700">TAJ</span>
+                </div>
               </div>
               
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-serif italic text-gray-700">The Oberoi</span>
+                </div>
               </div>
               
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-3xl font-bold text-gray-700">ITC</span>
+                </div>
               </div>
               
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
-              </div>
-              
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
-              </div>
-              
-              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
+              <div className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <div className="w-32 h-20 flex items-center justify-center">
+                  <span className="text-2xl font-serif text-gray-700">The Leela</span>
+                </div>
               </div>
             </div>
           </div>
