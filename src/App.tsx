@@ -192,23 +192,23 @@ function App() {
   const benefits = [
     {
       icon: Shield,
-      title: 'Lorem Ipsum',
-      description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur'
+      title: 'Quality Assured',
+      description: 'Every bottle undergoes rigorous quality testing to ensure the highest standards of purity and safety for your peace of mind'
     },
     {
       icon: Leaf,
-      title: 'Consectetur',
-      description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
+      title: 'Eco-Friendly',
+      description: 'Committed to sustainability with recyclable packaging and carbon-neutral operations to protect our planet for future generations'
     },
     {
       icon: Heart,
-      title: 'Adipiscing Elit',
-      description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam'
+      title: 'Health First',
+      description: 'Enriched with essential minerals and perfectly balanced pH levels to support your body\'s natural hydration needs'
     },
     {
       icon: Award,
-      title: 'Dolor Sit Amet',
-      description: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure'
+      title: 'Award Winning',
+      description: 'Recognized globally for excellence in quality, taste, and innovation in the premium water industry'
     }
   ];
 
@@ -271,12 +271,12 @@ function App() {
 
   const faqs = [
     {
-      question: 'Lorem ipsum dolor sit amet consectetur adipiscing elit?',
-      answer: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      question: 'What makes BrandBleu water different from regular bottled water?',
+      answer: 'BrandBleu water is sourced from pristine Himalayan springs and naturally enriched with 84+ essential minerals. Our advanced filtration process maintains the natural mineral balance while ensuring absolute purity, giving you water that\'s both healthy and refreshing.'
     },
     {
-      question: 'Duis aute irure dolor in reprehenderit in voluptate velit?',
-      answer: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+      question: 'Can I customize water bottles with my company logo?',
+      answer: 'Absolutely! We specialize in custom-branded water bottles for businesses, events, and special occasions. You can choose from various bottle sizes, shapes, and label designs. Our design team will work with you to create the perfect branded water solution.'
     },
     {
       question: 'What is the shelf life of your water?',
@@ -285,6 +285,30 @@ function App() {
     {
       question: 'Do you offer franchise opportunities?',
       answer: 'Yes, we offer franchise and distribution partnership opportunities in select markets. Please fill out our franchise inquiry form to learn more about joining our growing network.'
+    },
+    {
+      question: 'What is the minimum order quantity for custom branded bottles?',
+      answer: 'Our minimum order quantity varies depending on the bottle size and customization requirements. Typically, we require a minimum order of 5,000 bottles for fully custom designs. However, we can accommodate smaller orders for standard bottles with custom labels. Contact us for specific pricing and MOQ details.'
+    },
+    {
+      question: 'Is your packaging eco-friendly and recyclable?',
+      answer: 'Yes! We are committed to sustainability. Our bottles are made from 100% recyclable PET plastic and glass options. We also offer biodegradable label options and use minimal packaging materials. We\'re continuously working to reduce our carbon footprint and environmental impact.'
+    },
+    {
+      question: 'What are the different types of water you offer?',
+      answer: 'We offer three premium water varieties: Premium Mineral Water (naturally balanced with 84+ minerals), Alkaline Water Plus (pH 9.5+ for superior hydration), and Vitamin B12 Enhanced Water (fortified for energy and vitality). Each is carefully crafted to meet specific health and wellness needs.'
+    },
+    {
+      question: 'Do you deliver internationally?',
+      answer: 'Yes, we deliver to over 75 countries worldwide. Shipping times and costs vary by location. For bulk orders and international shipping quotes, please contact our sales team who will provide you with detailed information and the best shipping options for your region.'
+    },
+    {
+      question: 'What quality certifications does BrandBleu have?',
+      answer: 'BrandBleu is certified by ISO 22000 (Food Safety Management), HACCP, FDA approved, and holds BIS certification. Our facilities undergo regular third-party audits to ensure we maintain the highest standards of quality, safety, and hygiene in every bottle we produce.'
+    },
+    {
+      question: 'How quickly can you fulfill custom orders?',
+      answer: 'Once the design is approved, standard production time is 15-20 business days for custom branded bottles. Rush orders can be accommodated with an additional fee, with turnaround times as quick as 7-10 business days depending on order size and complexity.'
     }
   ];
 
@@ -498,17 +522,113 @@ function App() {
         </div>
       </section>
 
-      <section className="py-16 bg-white border-y border-gray-100">
+      <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-6">
-          <p className="text-center text-gray-500 mb-10 font-medium tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
-            {clients.map((client) => (
-              <div key={client.id} className="flex items-center justify-center group">
-                <span className="text-gray-400 font-bold text-lg hover:text-blue-600 transition-colors cursor-pointer group-hover:scale-110 transition-transform duration-300">
-                  {client.name}
-                </span>
+          <p className="text-center text-gray-600 mb-12 font-bold tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
+          
+          {/* Client Logos Slider */}
+          <div className="relative">
+            <div className="flex animate-scroll space-x-12 items-center">
+              {/* The Oberoi */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
               </div>
-            ))}
+              
+              {/* Trident */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
+              </div>
+              
+              {/* JW Marriott */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
+              </div>
+              
+              {/* Four Seasons */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
+              </div>
+              
+              {/* ITC */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
+              </div>
+              
+              {/* The Ritz-Carlton */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
+              </div>
+              
+              {/* Sofitel */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-light tracking-widest text-gray-700 whitespace-nowrap">SOFITEL</span>
+              </div>
+              
+              {/* Hyatt */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-gray-800 whitespace-nowrap">HYATT</span>
+              </div>
+              
+              {/* Hilton */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-700 whitespace-nowrap">Hilton</span>
+              </div>
+              
+              {/* TAJ */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-serif font-bold text-amber-800 whitespace-nowrap">TAJ</span>
+              </div>
+              
+              {/* The Leela */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">The Leela</span>
+              </div>
+              
+              {/* Lemon Tree */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-green-600 whitespace-nowrap">Lemon Tree</span>
+              </div>
+              
+              {/* Radisson */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-gray-800 whitespace-nowrap">RADISSON</span>
+              </div>
+              
+              {/* Vistara */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-purple-800 whitespace-nowrap">VISTARA</span>
+              </div>
+              
+              {/* Reliance */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-blue-800 whitespace-nowrap">Reliance</span>
+              </div>
+
+              {/* Duplicate for seamless loop */}
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-serif italic text-gray-700 whitespace-nowrap">The Oberoi</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-2xl font-bold text-red-800 whitespace-nowrap">TRIDENT</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">JW MARRIOTT</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-xl font-serif text-gray-700 whitespace-nowrap">Four Seasons</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-3xl font-bold text-blue-900 whitespace-nowrap">ITC</span>
+              </div>
+              
+              <div className="flex-shrink-0 px-6 py-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <span className="text-lg font-serif text-gray-700 whitespace-nowrap">The Ritz-Carlton</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -518,7 +638,7 @@ function App() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Why Choose BrandBleu</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Experience the perfect blend of purity, sustainability, and innovation in every bottle
             </p>
           </div>
 
@@ -544,7 +664,7 @@ function App() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Premium Features</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Cutting-edge technology meets natural purity for the ultimate hydration experience
             </p>
           </div>
 
@@ -674,7 +794,7 @@ function App() {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Premium Collection</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              Discover our range of premium water products, each crafted to perfection
             </p>
           </div>
 
@@ -781,10 +901,10 @@ function App() {
               
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">From Himalayan Peaks, <span className="text-cyan-300">To Your Glass</span></h2>
               <p className="text-lg text-blue-100 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                At BrandBleu, we believe that exceptional water starts with exceptional sources. Our water is sourced from pristine Himalayan springs, naturally filtered through layers of ancient rock formations, enriching it with essential minerals that your body craves.
               </p>
               <p className="text-lg text-blue-100 leading-relaxed">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                We combine nature's purity with cutting-edge bottling technology to deliver water that's not just refreshing, but truly transformative. Every drop is a testament to our commitment to quality, sustainability, and your well-being.
               </p>
 
               <div ref={statsRef} className="grid grid-cols-2 gap-6 pt-6">
@@ -805,7 +925,7 @@ function App() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Discover insights on hydration science, wellness tips, and sustainable living
             </p>
           </div>
 
@@ -821,7 +941,7 @@ function App() {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Exciting content coming soon! We're preparing insightful articles about hydration science, sustainable practices, and the journey of premium water from source to bottle.
                 </p>
               </div>
             </div>
@@ -833,7 +953,7 @@ function App() {
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
           </div>
 
           <div className="space-y-4">
@@ -867,7 +987,7 @@ function App() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-              <p className="text-xl text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-2xl">
@@ -931,7 +1051,7 @@ function App() {
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
           </div>
 
           <div className="space-y-4">
@@ -965,7 +1085,7 @@ function App() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-              <p className="text-xl text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              <p className="text-xl text-gray-600">Everything you need to know about BrandBleu water and our services</p>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-2xl">
@@ -1328,4 +1448,3 @@ function App() {
 }
 
 export default App;
-
