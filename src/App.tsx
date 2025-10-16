@@ -1,10 +1,15 @@
+// ============================================
+// IMPORTS
+// ============================================
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Droplet, Award, Shield, Leaf, Star, Users, CheckCircle, Sparkles, Heart, Building2, Handshake, FileText, Send, Zap, Globe, Package, BadgeCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Award, Shield, Leaf, Star, Users, CheckCircle, Sparkles, Heart, Building2, Handshake, FileText, Send, Zap, Globe, Package, BadgeCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase, type Product, type Client, type ProductCategory } from './lib/supabase';
+import logo from './logo.png';
 
 function App() {
-  const navigate = useNavigate();
+  // ============================================
+  // STATE MANAGEMENT
+  // ============================================
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -25,6 +30,9 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentProductSlide, setCurrentProductSlide] = useState(0);
 
+  // ============================================
+  // EFFECTS & LIFECYCLE
+  // ============================================
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -45,12 +53,14 @@ function App() {
     fetchData();
   }, []);
 
+  // ============================================
+  // DATA FETCHING
+  // ============================================
   const fetchData = async () => {
     try {
-      const [productsRes, categoriesRes, blogsRes, clientsRes] = await Promise.all([
+      const [productsRes, categoriesRes, clientsRes] = await Promise.all([
         supabase.from('products').select('*').eq('is_featured', true).order('display_order'),
         supabase.from('product_categories').select('*').order('display_order'),
-        supabase.from('blog_posts').select('*').eq('published', true).order('published_at', { ascending: false }).limit(4),
         supabase.from('clients').select('*').eq('is_featured', true).order('display_order')
       ]);
 
@@ -122,12 +132,6 @@ function App() {
         ]);
       }
 
-      if (blogsRes.data && blogsRes.data.length > 0) {
-        // Blog posts would be set here if available
-      } else {
-        // Blog posts are coming soon - no mock data needed
-      }
-
       if (clientsRes.data && clientsRes.data.length > 0) {
         setClients(clientsRes.data);
       } else {
@@ -141,10 +145,19 @@ function App() {
     }
   };
 
+  // ============================================
+  // FORM HANDLERS
+  // ============================================
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const { error } = await supabase.from('contact_inquiries').insert([contactForm]);
+      
+      // Send WhatsApp message
+      const message = `*New Contact Inquiry*%0A%0A*Name:* ${contactForm.name}%0A*Email:* ${contactForm.email}%0A*Phone:* ${contactForm.phone}%0A*Subject:* ${contactForm.subject}%0A*Message:* ${contactForm.message}`;
+      const whatsappNumber = '919988561191';
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      
       if (!error) {
         alert('Thank you for your message. We will get back to you soon!');
         setContactForm({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -158,6 +171,12 @@ function App() {
     e.preventDefault();
     try {
       const { error } = await supabase.from('franchise_inquiries').insert([franchiseForm]);
+      
+      // Send WhatsApp message
+      const message = `*New Franchise Inquiry*%0A%0A*Name:* ${franchiseForm.name}%0A*Email:* ${franchiseForm.email}%0A*Phone:* ${franchiseForm.phone}%0A*Location:* ${franchiseForm.location}%0A*Investment Capacity:* ${franchiseForm.investment_capacity}%0A*Business Experience:* ${franchiseForm.business_experience}%0A*Message:* ${franchiseForm.message}`;
+      const whatsappNumber = '919988561191';
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      
       if (!error) {
         alert('Thank you for your franchise inquiry. Our team will contact you soon!');
         setFranchiseForm({ name: '', email: '', phone: '', location: '', investment_capacity: '', business_experience: '', message: '' });
@@ -212,15 +231,8 @@ function App() {
     }
   ];
 
-  // WhatsApp chat link
-  const whatsappNumber = (import.meta as any).env?.VITE_WHATSAPP_NUMBER as string | undefined;
-  const fallbackWhatsappNumber = '918283857170'; // +91 82838 57170
-  const cleanedNumber = (whatsappNumber && whatsappNumber.trim().length > 0)
-    ? whatsappNumber.replace(/[^\d]/g, '')
-    : fallbackWhatsappNumber;
-  const whatsappUrl = `https://wa.me/${cleanedNumber}?text=${encodeURIComponent('Hello! I would like to know more.')}`;
+  const whatsappUrl = `https://wa.me/919988561191?text=Hello%20BrandBleu%2C%20I%20would%20like%20to%20place%20a%20bulk%20order`;
 
-  // Hero slider data
   const slides = [
     {
       tag: 'BEST CUSTOM LABEL WATER BRAND',
@@ -342,17 +354,19 @@ function App() {
     }
   ];
 
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <div className="min-h-screen bg-white">
+      {/* ============================================ */}
+      {/* HEADER / NAVIGATION */}
+      {/* ============================================ */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/80 backdrop-blur-sm'}`}>
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-6 pt-4 pb-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="relative">
-                <Droplet className="h-9 w-9 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-blue-400 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-700 via-cyan-600 to-blue-500 bg-clip-text text-transparent">BrandBleu</span>
+            <div className="flex items-center space-x-3 group cursor-pointer -my-8 ml-8">
+              <img src={logo} alt="BrandBleu" className="h-44 w-auto object-contain" />
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -360,35 +374,12 @@ function App() {
                 Home
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
               </a>
-              <div className="relative group">
-                <a href="#products" className="text-gray-700 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
-                  <span>Products</span>
-                  <ChevronDown className="h-4 w-4" />
-                </a>
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
-                  <a href="#products" onClick={() => setSelectedProductCategory('all')} className="w-full px-6 py-3 text-left hover:bg-blue-50 transition-colors flex items-center space-x-3 border-b border-gray-100">
-                    <Droplet className="h-5 w-5 text-blue-600" />
-                    <span className="font-semibold text-gray-900">All Products</span>
-                  </a>
-                  {categories.map((category) => (
-                    <a 
-                      key={category.id}
-                      href="#products" 
-                      onClick={() => setSelectedProductCategory(category.id)} 
-                      className="w-full px-6 py-3 text-left hover:bg-blue-50 transition-colors flex items-center space-x-3 text-gray-700 hover:text-blue-600"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-                      <span>{category.name}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium relative group">
-                About
+              <a href="#products" className="text-gray-700 hover:text-blue-600 transition-colors font-medium relative group">
+                Products
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
               </a>
-              <a href="#blog" className="text-gray-700 hover:text-blue-600 transition-colors font-medium relative group">
-                Blog
+              <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium relative group">
+                About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors font-medium relative group">
@@ -442,7 +433,6 @@ function App() {
                 </div>
               </div>
               <a href="#about" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">About</a>
-              <a href="#blog" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">Blog</a>
               <a href="#faq" className="block text-gray-700 hover:text-blue-600 py-2 font-medium">FAQ</a>
               <button onClick={() => setShowFranchise(true)} className="block text-gray-700 hover:text-blue-600 py-2 font-medium w-full text-left">Franchise</button>
               <button onClick={() => setShowDistribution(true)} className="block text-gray-700 hover:text-blue-600 py-2 font-medium w-full text-left">Distribution</button>
@@ -452,7 +442,10 @@ function App() {
         </nav>
       </header>
 
-      <section id="home" className="relative overflow-hidden min-h-screen flex items-center pt-20">
+      {/* ============================================ */}
+      {/* HERO SECTION */}
+      {/* ============================================ */}
+      <section id="home" className="relative overflow-hidden min-h-screen flex items-center pt-32">
         {/* Background Image Slider */}
         <div className="absolute inset-0">
           <img
@@ -522,6 +515,9 @@ function App() {
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* CLIENT LOGOS SECTION */}
+      {/* ============================================ */}
       <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-6">
           <p className="text-center text-gray-600 mb-12 font-bold tracking-wide uppercase text-sm">Trusted by Industry Leaders</p>
@@ -633,6 +629,9 @@ function App() {
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* WHY CHOOSE US SECTION */}
+      {/* ============================================ */}
       <section className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -659,6 +658,9 @@ function App() {
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* FEATURES SECTION */}
+      {/* ============================================ */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -874,6 +876,9 @@ function App() {
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* ABOUT SECTION */}
+      {/* ============================================ */}
       <section id="about" className="py-24 bg-gradient-to-br from-blue-900 via-cyan-900 to-sky-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
@@ -920,35 +925,9 @@ function App() {
         </div>
       </section>
 
-      <section id="blog" className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover insights on hydration science, wellness tips, and sustainable living
-            </p>
-          </div>
-
-          {loading ? (
-            <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <div className="max-w-md mx-auto">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <FileText className="h-10 w-10 text-blue-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Exciting content coming soon! We're preparing insightful articles about hydration science, sustainable practices, and the journey of premium water from source to bottle.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
+      {/* ============================================ */}
+      {/* FAQ SECTION */}
+      {/* ============================================ */}
       <section id="faq" className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center mb-16">
@@ -977,6 +956,9 @@ function App() {
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* CONTACT SECTION */}
+      {/* ============================================ */}
       <section id="contact" className="py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-10 right-10 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
@@ -995,65 +977,67 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
-                      placeholder=""
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
-                      placeholder=""
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
                   <input
                     type="text"
-                    value={contactForm.subject}
-                    onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                    required
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                     className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
                     placeholder=""
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                  <textarea
-                    rows={6}
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                  <input
+                    type="email"
                     required
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none hover:border-gray-300"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
                     placeholder=""
                   />
                 </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl hover:shadow-2xl transition-all font-semibold text-lg hover:scale-[1.02] flex items-center justify-center space-x-2 group">
-                  <span>Send Message</span>
-                  <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </form>
-            </div>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+                <input
+                  type="text"
+                  value={contactForm.subject}
+                  onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                  className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all hover:border-gray-300"
+                  placeholder=""
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                <textarea
+                  rows={6}
+                  required
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                  className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none hover:border-gray-300"
+                  placeholder=""
+                />
+              </div>
+              <button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl hover:shadow-2xl transition-all font-semibold text-lg hover:scale-[1.02] flex items-center justify-center space-x-2 group">
+                <span>Send Message</span>
+                <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
           </div>
+        </div>
         </div>
       </section>
 
+      {/* ============================================ */}
+      {/* FOOTER */}
+      {/* ============================================ */}
       <footer className="bg-gradient-to-br from-blue-900 via-cyan-900 to-sky-900 text-white py-16">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <Droplet className="h-10 w-10 text-cyan-300" />
-                <span className="text-3xl font-bold">BrandBleu</span>
+                <img src={logo} alt="BrandBleu" className="h-12 w-auto" />
               </div>
               <p className="text-blue-100 leading-relaxed">
                 Premium natural water for a healthier lifestyle. Experience purity in every drop.
@@ -1077,7 +1061,6 @@ function App() {
                 <li><a href="#home" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Home</a></li>
                 <li><a href="#products" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Products</a></li>
                 <li><a href="#about" className="hover:text-white transition-colors hover:translate-x-1 inline-block">About</a></li>
-                <li><a href="#blog" className="hover:text-white transition-colors hover:translate-x-1 inline-block">Blog</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors hover:translate-x-1 inline-block">FAQ</a></li>
               </ul>
             </div>
@@ -1118,6 +1101,9 @@ function App() {
         </div>
       </footer>
 
+      {/* ============================================ */}
+      {/* FRANCHISE MODAL */}
+      {/* ============================================ */}
       {showFranchise && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowFranchise(false)}>
           <div className="bg-white rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -1224,7 +1210,7 @@ function App() {
             Chat with us
           </div>
           <div className="w-14 h-14 rounded-full bg-[#25D366] shadow-xl hover:shadow-2xl transition-all flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" className="w-7 h-7 fill-white">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" className="w-7 h-7 fill-white">
               <path d="M19.11 17.36c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.62.14-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.2-1.34-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.49-.85-2.04-.22-.53-.45-.46-.62-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.99 2.65 1.13 2.83.14.18 1.94 2.96 4.7 4.15.66.29 1.18.46 1.58.59.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.28.23-.63.23-1.16.16-1.28-.07-.12-.25-.18-.52-.32z"/>
               <path d="M26.62 5.38C24.23 2.98 21.22 1.7 18 1.7 9.94 1.7 3.4 8.24 3.4 16.3c0 2.58.67 5.1 1.95 7.33L3 31l7.54-2.31c2.16 1.18 4.61 1.81 7.11 1.81 8.06 0 14.6-6.54 14.6-14.6 0-3.22-1.28-6.23-3.68-8.62zM18.65 27.5c-2.23 0-4.41-.6-6.31-1.74l-.45-.27-4.47 1.37 1.37-4.35-.29-.45c-1.2-1.94-1.83-4.18-1.83-6.45 0-6.8 5.54-12.34 12.34-12.34 3.3 0 6.41 1.28 8.76 3.62 2.34 2.34 3.62 5.46 3.62 8.76 0 6.8-5.54 12.34-12.34 12.34z"/>
             </svg>
@@ -1255,6 +1241,12 @@ function App() {
               };
               try {
                 const { error } = await supabase.from('distribution_inquiries').insert([formData]);
+                
+                // Send WhatsApp message
+                const message = `*New Distribution Inquiry*%0A%0A*Company:* ${formData.company_name}%0A*Contact Person:* ${formData.contact_person}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Location:* ${formData.location}%0A*Distribution Type:* ${formData.distribution_type}%0A*Message:* ${formData.message}`;
+                const whatsappNumber = '919988561191';
+                window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+                
                 if (!error) {
                   alert('Thank you for your distribution inquiry. We will contact you soon!');
                   setShowDistribution(false);
@@ -1345,6 +1337,26 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* ============================================ */}
+      {/* FLOATING WHATSAPP BUTTON */}
+      {/* ============================================ */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-2xl hover:shadow-green-500/50 transition-all duration-300 hover:scale-110 group"
+        aria-label="Contact us on WhatsApp"
+      >
+        <svg
+          className="w-8 h-8"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+      </a>
     </div>
   );
 }
