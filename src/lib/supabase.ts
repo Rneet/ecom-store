@@ -40,6 +40,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = client;
 
+// Types used in App.tsx
 export type Product = {
   id: string;
   category_id: string;
@@ -67,30 +68,6 @@ export type ProductCategory = {
   created_at: string;
 };
 
-export type ProductSize = {
-  id: string;
-  product_id: string;
-  size: string;
-  price: number;
-  stock_status: string;
-  created_at: string;
-};
-
-export type BlogPost = {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  featured_image: string;
-  published: boolean;
-  published_at: string;
-  views: number;
-  created_at: string;
-  updated_at: string;
-};
-
 export type Client = {
   id: string;
   name: string;
@@ -99,36 +76,4 @@ export type Client = {
   display_order: number;
   is_featured: boolean;
   created_at: string;
-};
-
-export type ContactInquiry = {
-  name: string;
-  email: string;
-  phone?: string;
-  subject?: string;
-  message: string;
-};
-
-export type FranchiseInquiry = {
-  name: string;
-  email: string;
-  phone: string;
-  location: string;
-  investment_capacity?: string;
-  business_experience?: string;
-  message?: string;
-};
-
-export type DistributionInquiry = {
-  company_name: string;
-  contact_person: string;
-  email: string;
-  phone: string;
-  location: string;
-  distribution_type?: string;
-  message?: string;
-};
-
-export type NewsletterSubscription = {
-  email: string;
 };
